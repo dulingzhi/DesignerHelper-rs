@@ -1,6 +1,6 @@
 [package]
 name = "DesignerHelper-rs"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jai <814683@qq.com>"]
 edition = "2018"
 description = "Qt designer.exe launcher"
