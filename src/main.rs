@@ -57,7 +57,7 @@ fn run(matches: clap::ArgMatches) -> Result<(), Error> {
 }
 
 fn get_designer_port() -> u16 {
-    let pid = Path::new("./PID");
+    let pid = Path::new("./.pid");
     let mut port = 0;
 
     if pid.exists() {
@@ -113,6 +113,6 @@ fn launch_desiner_server(ui: &str) -> Result<(), Error> {
 }
 
 fn write_designer_port(port: &str) {
-    let pid = Path::new("./PID");
+    let pid = Path::new("./.pid");
     fs::write(pid, port).expect("failed to write pid");
 }

@@ -5,6 +5,7 @@ authors = ["Jai <814683@qq.com>"]
 edition = "2018"
 description = "Qt designer.exe launcher"
 license = "MIT"
+repository = "https://github.com/dulingzhi/DesignerHelper-rs"
 
 [dependencies]
 failure = "0.1.5"
