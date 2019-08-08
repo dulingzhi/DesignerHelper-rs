@@ -1,0 +1,10 @@
+[package]
+name = "DesignerHelper-rs"
+version = "0.1.0"
+authors = ["Jai <814683@qq.com>"]
+edition = "2018"
+
+[dependencies]
+failure = "0.1.5"
+clap = "2.33.0"
+
