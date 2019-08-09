@@ -83,8 +83,35 @@ fn send_to_designer(pid: u16, ui: &str) -> bool {
 }
 
 fn launch_desiner_server(ui: &str) -> Result<(), Error> {
-    let env = std::env::var("QTDIR")?;
-    let qtdesigner = format!("{}\\bin\\designer.exe", env);
+    use find_folder::Search;
+
+    let git_path = Search::Parents(20)
+        .of(Path::new(ui).parent().unwrap().to_path_buf())
+        .for_folder(".git")
+        .unwrap();
+
+    let mut search_env = false;
+
+    if git_path.is_dir() {
+        let root = Search::Kids(1).of(git_path.parent().unwrap().to_path_buf());
+        if !root.for_folder("IDE").unwrap().is_dir() || !root.for_folder(".premake").unwrap().is_dir()
+        {
+            search_env = true;
+        }
+    }
+
+    let qtdesigner: String;
+    if !search_env {
+        qtdesigner = format!(
+            "{}\\Client\\3rd\\qt\\bin\\designer.exe",
+            git_path.parent().unwrap().display()
+        );
+    } else {
+        let env = std::env::var("QTDIR")?;
+        qtdesigner = format!("{}\\bin\\designer.exe", env);
+    }
+
+    println!("desinger.exe path: {}", qtdesigner);
 
     if !Path::new(&qtdesigner).exists() {
         panic!("not found designer: {}", qtdesigner);
